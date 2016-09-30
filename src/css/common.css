@@ -1,0 +1,94 @@
+*, html, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "微软雅黑","宋体","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.main-header .logo{
+    font-family: "微软雅黑","宋体","Helvetica Neue",Helvetica,Arial,sans-serif;
+    float: none;
+    width: auto;
+}
+.sidebar-menu li>a>.fa-angle-left, .sidebar-menu li.active>a>.pull-right-container>.fa-angle-left {
+    transform: rotate(90deg);
+}
+.main-footer p{
+    margin: 0;
+    text-align: center;
+}
+.main-header .sidebar-toggle{
+    display: none;
+}
+@media (max-width: 767px) {
+    .main-header .sidebar-toggle{
+        display: block;
+    }
+    .main-sidebar,.left-side {
+        padding-top: 50px;
+    }
+}
+.skin-blue .main-header .sidebar-toggle {
+    color: #fff;
+    background-color: #3c8dbc;
+}
+
+.skin-blue .main-header .sidebar-toggle:hover {
+    color: #f6f6f6;
+    background: #33759a;
+}
+.content-header, .content {
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+table.table-list th{
+    font-weight: normal;
+    background-color: #3c8dbc;
+    color: #fff;
+}
+.skin-blue .treeview-menu>li>a.active, .skin-blue .treeview-menu>li>a:hover {
+    color: #fff;
+}
+.errors p {
+    color: #f00;
+}
+div.dataTables_info {
+    padding-top: 8px;
+    white-space: nowrap;
+    font-size: 12px;
+}
+div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+div.dataTables_paginate ul.pagination {
+    font-size: 12px;
+    margin: 2px 0;
+    white-space: nowrap;
+}
+div.dataTables_paginate ul li a{
+    cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  div.dataTables_wrapper > div.row > div,
+  div.dataTables_length,
+  div.dataTables_filter,
+  div.dataTables_info,
+  div.dataTables_paginate {
+    text-align: center;
+  }
+  div.dataTables_info {
+    padding-bottom: 10px;
+  }
+}
+.left-panel dt{
+    float: left;
+    width: 45px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: normal;
+}
+.left-panel dd{
+    margin-left: 46px;
+}
