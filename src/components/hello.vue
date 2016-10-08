@@ -17,7 +17,7 @@
     export default{
         data () {
            return {
-                hello:"这里是嵌套路由！"
+                hello:"这里是嵌套路由！@#￥@#￥@#"
             }
         },
         components: {

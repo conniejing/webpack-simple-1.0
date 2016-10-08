@@ -1,16 +1,18 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
   entry: {
-    'main': path.resolve(__dirname, './src/main.js'),
-    'login': path.resolve(__dirname, './src/pages/login/main.js')
+    'build': path.resolve(__dirname, './src/main.js'),
+    'vendor': path.resolve(__dirname, './src/vendor.js')
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: '[name]/build.js',
+    filename: '[name].js',
     chunkFilename: '[name].js' 
     //指代的是当前chunk的一个hash版本，也就是说，在同一次编译中，每一个chunk的hash都是不一样的；而在两次编译中，如果某个chunk根本没有发生变化，那么该chunk的hash也就不会发生变化。这在缓存的层面上来说，就是把缓存的粒度精细到具体某个chunk，只要chunk不变，该chunk的浏览器缓存就可以继续使用。
   },
@@ -55,14 +57,23 @@ module.exports = {
     ]
   },
   plugins: [
-      new ExtractTextPlugin("common.css"),
+      //自动生成入口html文件
+      // new HtmlWebpackPlugin({
+      //   template: '',
+      //   chunk: ['build', 'vendor'],
+      //   title: '首页'
+      // }),
+      //css单独打包
+      new ExtractTextPlugin("[name].css"),
+      //子模块加载公用模块次数超过2次，则打包进父模块
       new webpack.optimize.CommonsChunkPlugin({
-        // name: 'common',
-        // filename: '[name].js',
-        // chunks: ['hello', 'list'],
         children: true,
-        // async: 'base',
         minChunks: 2
+      }),
+      //把vendor代码单独打包
+      new webpack.optimize.CommonsChunkPlugin({  
+        name : "vendor",
+        minChunks : Infinity
       }),
       //ProvidePlugin的机制是：当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块。
       //jquery会被打包到入口js中
@@ -71,28 +82,32 @@ module.exports = {
           jQuery: 'jquery',
           'window.jQuery': 'jquery',
           'window.$': 'jquery',
-      })
-  ]/*,
+      }),  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: '#eval-source-map'*/
+  devtool: '#eval-source-map'
 }
-// if (process.env.NODE_ENV === 'production') {
-//   module.exports.devtool = '#source-map'
-//   // http://vue-loader.vuejs.org/en/workflow/production.html
-//   module.exports.plugins = (module.exports.plugins || []).concat([
-//     new webpack.DefinePlugin({
-//       'process.env': {
-//         NODE_ENV: '"production"'
-//       }
-//     }),
-//     new webpack.optimize.UglifyJsPlugin({
-//       compress: {
-//         warnings: false
-//       }
-//     }),
-//     new webpack.optimize.OccurenceOrderPlugin()
-//   ])
-// }
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    //压缩js
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    // Search for equal or similar files and deduplicate them in the output.
+    // Note: Don’t use it in watch mode. Only for production builds.
+    new webpack.optimize.DedupePlugin(),
+    // Assign the module and chunk ids by occurrence count.
+    new webpack.optimize.OccurrenceOrderPlugin()
+  ])
+}
