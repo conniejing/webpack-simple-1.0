@@ -1,4 +1,5 @@
 require('./css/common.css');
+require('./css/animate.css');
 
 // require('bootstrap');
 import Vue from 'vue'
@@ -20,11 +21,10 @@ var App = Vue.extend({
         MyHeader
     },
     ready (){
-        require.ensure(['jquery'], function(require){
-            var $ = require('jquery');
-            console.log($(document));
-        });
-        
+        // require.ensure(['jquery'], function(require){
+        //     var $ = require('jquery');
+        //     console.log($(document));
+        // });
     }
 });
 

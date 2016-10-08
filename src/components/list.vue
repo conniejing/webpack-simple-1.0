@@ -1,4 +1,28 @@
+<style scoped>
+li{
+    height: 30px;
+    line-height: 30px;
+    list-style: none;
+}
+h1 {
+    color: blue;
+}
+</style>
+
+<template>
+    <h1>H1</h1>
+<ul>
+    <li v-for="person in peoples">
+        {{person.name}} : {{person.age}}
+    </li>
+</ul>
+</template>
+
 <script>
+
+    import Test from './test.vue';
+    var a = require('./a');
+    a.sayHi();
     export default{
         data () {
             return {
@@ -28,24 +52,7 @@
             activate: function(transition){
                 transition.next();
             }
-        }
+        },
+        components: { Test }
     }
 </script>
-<template>
-    <h1>H1</h1>
-<ul>
-    <li v-for="person in peoples">
-        {{person.name}} : {{person.age}}
-    </li>
-</ul>
-</template>
-<style scoped>
-li{
-    height: 30px;
-    line-height: 30px;
-    list-style: none;
-}
-h1 {
-    color: blue;
-}
-</style>

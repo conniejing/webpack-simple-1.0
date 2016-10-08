@@ -11,6 +11,9 @@
 
 <script>
     import MyHeader from './Header.vue';
+    import Test from './test.vue';
+    var a = require('./a');
+    a.sayHi();
     export default{
         data () {
            return {
@@ -18,7 +21,8 @@
             }
         },
         components: {
-            MyHeader
+            MyHeader,
+            Test
         }
     }
 </script>

@@ -1,8 +1,8 @@
 <script>
     // require("../css/other.css");
     
-    // require("../vendors/jquery/datepicker/bootstrap-datepicker.js");
-    // require("../vendors/jquery/datepicker/datepicker3.css");
+    require("../vendors/jquery/datepicker/bootstrap-datepicker.js");
+    require("../vendors/jquery/datepicker/datepicker3.css");
 
     export default{
         data () {
@@ -18,15 +18,16 @@
             activate: function(transition){
                 transition.next();
             }
-        }/*,
-        ready(){            
+        },
+        ready(){   
+            // console.log($);         
             $('.datepicker').datepicker({
                 format: "yyyy-mm-dd",
                 language: "zh-CN",
                 todayBtn: 'linked',
                 autoclose:true
             });
-        }*/
+        }
     }
 </script>
 <template>
