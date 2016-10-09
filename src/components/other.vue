@@ -27,11 +27,23 @@
                 todayBtn: 'linked',
                 autoclose:true
             });
+            $.ajax({
+                url: "/mock/users/login?userName=admin&pwd=123456",
+                method: 'GET',
+                dataType: "json",
+                async: true,
+                contentType: "application/json; charset=utf-8"
+            }).fail(function(data){
+                console.warn(data);
+            }).done(function(data){
+                console.log(data);
+            });
         }
     }
 </script>
 <template>
 <ul>
+    <p>AAAAA</p>
     <h1>{{msg}}</h1>
     <h2>生日：{{birthday}}</h2>
     <input class="datepicker" type="text" v-model="birthday" />

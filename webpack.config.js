@@ -13,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: '[name].js',
-    chunkFilename: '[name].js' 
+    chunkFilename: '[id].bundle.js' 
     //指代的是当前chunk的一个hash版本，也就是说，在同一次编译中，每一个chunk的hash都是不一样的；而在两次编译中，如果某个chunk根本没有发生变化，那么该chunk的hash也就不会发生变化。这在缓存的层面上来说，就是把缓存的粒度精细到具体某个chunk，只要chunk不变，该chunk的浏览器缓存就可以继续使用。
   },
   resolveLoader: {
@@ -85,7 +85,16 @@ module.exports = {
       }),  ],
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    port: 9001,
+    proxy: {  
+      '/mock/*': {
+        target: 'http://localhost:8080',
+        rewrite: function(req) {
+          req.url = req.url.replace(/^\/mock/, '');
+        }
+      }
+    }
   },
   devtool: '#eval-source-map'
 }
